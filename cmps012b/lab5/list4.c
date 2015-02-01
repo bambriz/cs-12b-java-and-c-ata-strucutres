@@ -1,0 +1,45 @@
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node node;
+struct node {
+   char *word;
+   node *link;
+};
+// code is very messy because unix doesnt copy well from notepadd ++
+int main (int argc, char **argv) {
+  
+    node *head = NULL;
+     for (int argi = 0; argi < 5; ++argi) {
+         node *node = malloc (sizeof (struct node));
+           assert (node != NULL);
+             node->word = argv[argi];
+              node->link = head;
+                head = node;
+                                          
+            }
+     for (node *curr = head; curr->link != NULL; curr = curr->link) {
+                printf ("%p->node {word=%p->[%s], link=%p}\n",
+                        curr, curr->word, curr->word, curr->link);
+         }
+                                                                       
+        while (head->link != NULL){
+                                                                                     
+               node *temp = head->link;
+                                                                                           
+                 free(head);
+                                                                           
+                    head = temp;
+                            }
+                                                                                                                  
+                    free (head);
+                     return EXIT_SUCCESS;
+
+
+}
+
+
+
+
+

@@ -1,0 +1,8 @@
+lrwxr-xr-x. 1 bambriz users 71 Oct 17 02:30 lab2 -> /afs/cats.ucsc.edu/users/u/bambriz/12b/Labs-cmps012m/lab2u-unix-shells/
+  File: `lab2' -> `/afs/cats.ucsc.edu/users/u/bambriz/12b/Labs-cmps012m/lab2u-unix-shells/'
+  Size: 71        	Blocks: 2          IO Block: 4096   symbolic link
+Device: 15h/21d	Inode: 1373045336  Links: 1
+Access: (0755/lrwxr-xr-x)  Uid: (34564/ bambriz)   Gid: (  101/   users)
+Access: 2013-10-17 02:30:52.000000000 -0700
+Modify: 2013-10-17 02:30:52.000000001 -0700
+Change: 2013-10-17 02:30:52.000000000 -0700

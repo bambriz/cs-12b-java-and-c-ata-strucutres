@@ -1,0 +1,282 @@
+head	1.10;
+access;
+symbols;
+locks;
+comment	@ * @;
+
+
+1.10
+date	2014.05.23.08.55.02;	author -;	state -;
+branches;
+next	1.9;
+
+1.9
+date	2014.05.23.08.54.38;	author -;	state -;
+branches;
+next	1.8;
+
+1.8
+date	2014.05.23.08.42.57;	author -;	state -;
+branches;
+next	1.7;
+
+1.7
+date	2014.05.23.08.40.58;	author -;	state -;
+branches;
+next	1.6;
+
+1.6
+date	2014.05.23.08.39.48;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2014.05.23.08.37.42;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2014.05.23.08.36.04;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2014.05.23.08.34.45;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2014.05.23.08.32.50;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2014.05.23.08.15.10;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.10
+log
+@-
+@
+text
+@// Bryan Ambriz Bambriz
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "queue.h"
+
+#define STUBPRINTF(...) fprintf (stderr, __VA_ARGS__);
+
+typedef struct queue_node queue_node;
+struct queue_node {
+   queue_item_t item;
+   queue_node *link;
+};
+
+struct queue {
+   queue_node *front;
+   queue_node *rear;
+};
+
+queue *new_queue (void) {
+     queue *new_queue = malloc (sizeof (struct queue));
+     //assert (this != NULL); 
+ // STUBPRINTF ("return NULL\n");
+   return new_queue;
+}
+
+void free_queue (queue *this) {
+   assert (isempty_queue (this));
+   memset (this, 0, sizeof (struct queue));
+   free (this);
+}
+
+void insert_queue (queue *this, queue_item_t item) {
+     queue_node *tmp = malloc (sizeof (struct queue));
+     tmp->item = item;
+     
+     if(this->rear != NULL){
+        this->rear->link = tmp;
+        this->rear = tmp;
+     }else{
+         this->front = tmp;
+         this->rear = tmp;
+         }
+      
+ // STUBPRINTF ("item =\n\t\"%s\"\n", item);
+}
+
+queue_item_t remove_queue (queue *this) {
+   assert (! isempty_queue (this));
+   queue_node *t = this->front->link;
+   queue_item_t r = this->front->item;
+   free(this->front->item);
+   free(this->front);
+   this->front = t;
+   return r;
+}
+
+bool isempty_queue (queue *this) {
+   return this->front == NULL;
+}
+
+@
+
+
+1.9
+log
+@-
+@
+text
+@d53 1
+a53 1
+   queue_node t = this->front->link;
+@
+
+
+1.8
+log
+@-
+@
+text
+@d53 1
+a53 1
+   queue_node *t = malloc(sizeof(struct queue));
+@
+
+
+1.7
+log
+@-
+@
+text
+@d24 1
+a24 1
+     queue new_queue = malloc (sizeof (struct queue));
+d37 1
+a37 1
+     queue_node tmp = malloc (sizeof (struct queue));
+d53 1
+a53 1
+   queue_node t = malloc(sizeof(struct queue));
+@
+
+
+1.6
+log
+@-
+@
+text
+@d24 1
+a24 1
+     queue *new_queue = malloc (sizeof (struct queue));
+d33 1
+a33 1
+   free (*this);
+d37 1
+a37 1
+     queue_node *tmp = malloc (sizeof (struct queue));
+d53 1
+a53 1
+   queue_node *t = malloc(sizeof(struct queue));
+@
+
+
+1.5
+log
+@-
+@
+text
+@d33 1
+a33 1
+   free (this);
+@
+
+
+1.4
+log
+@-
+@
+text
+@d32 1
+a32 1
+   memset (this, 0, sizeof (struct this));
+d37 1
+a37 1
+     queue_node *tmp = malloc (sizeof (struct this));
+d53 1
+a53 1
+   queue_node *t = malloc(sizeof(struct this));
+@
+
+
+1.3
+log
+@-
+@
+text
+@d32 1
+a32 1
+    memset (this, 0, sizeof (struct *this));
+d37 1
+a37 1
+     queue_node *tmp = malloc (sizeof (struct *this));
+d53 1
+a53 1
+   queue_node *t = malloc(sizeof(struct *this));
+@
+
+
+1.2
+log
+@-
+@
+text
+@d32 1
+a32 1
+    memset (this, 0, sizeof (struct this));
+d37 1
+a37 1
+     queue_node *tmp = malloc (sizeof (struct this));
+d53 1
+a53 1
+   queue_node t = malloc(sizeof(struct this));
+@
+
+
+1.1
+log
+@-
+@
+text
+@d25 1
+a25 1
+     assert (this != NULL); 
+d27 1
+a27 1
+   return NULL;
+d32 1
+a32 1
+   free (this->item);
+d37 10
+a46 5
+     queue *tmp = this->front;
+     this->front= NULL;
+     item = this->rear;
+     this->rear= *tmp;
+     return this;
+d53 6
+a58 3
+   this->list = NULL
+ //  STUBPRINTF ("return NULL\n");
+   return NULL;
+@

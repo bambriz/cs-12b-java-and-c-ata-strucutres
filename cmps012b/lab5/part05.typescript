@@ -1,0 +1,23 @@
+Script started on Thu 08 May 2014 12:56:26 AM PDT
+You are currently using 32% (156.3 MiB) of your 488.3 MiB quota.
+[bambriz@unix1 lab5]$ mk liat[K[Kst1.c
+CSOURCE=list1.c EXECBIN=list1
++ cid + list1.c
++ checksource list1.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list1.c -o list1 -lm
+list1.c: In function ‘main’:
+list1.c:15:7: warning: implicit declaration of function ‘malloc’ [-Wimplicit-function-declaration]
+       node *node = malloc (sizeof (struct node));
+       ^
+list1.c:15:20: warning: incompatible implicit declaration of built-in function ‘malloc’ [enabled by default]
+       node *node = malloc (sizeof (struct node));
+                    ^
+list1.c:12:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
++ set +x
+============================================================
+[bambriz@unix1 lab5]$ exit
+exit
+
+Script done on Thu 08 May 2014 01:01:41 AM PDT

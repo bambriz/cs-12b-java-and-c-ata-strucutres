@@ -1,0 +1,32 @@
+Script started on Thu 07 Nov 2013 04:44:20 AM PST
+You are currently using 31% (152.0 MiB) of your 488.3 MiB quota.
+]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ mk list4.c
+CSOURCE=list4.c EXECBIN=list4
++ cid + list4.c
++ checksource list4.c
+checksource: line length > 72 characters
+   file "list4.c": 4 errors: lines 28, 30, 32, 35
+checksource: TOTAL COMPLAINTS: 4
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list4.c -o list4 -lm
+list4.c: In function ‘main’:
+list4.c:11: warning: unused parameter ‘argc’
++ set +x
+============================================================
+]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ valgrind --leak-check=full / list4 foo bar baz qux
+valgrind: /: is a directory
+]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ valgrind --leak-check=full / list4 foo bar baz qux/[P[1@\
+valgrind:  list4: command not found
+]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ ls
+[0m[01;32mlist1[0m    list3.c   [01;32mmk[0m                 part04.typescript  part09.typescript
+list1.c  [01;32mlist4[0m     part01             part05.typescript  [01;34mRCS[0m
+[01;32mlist2[0m    list4.c   part01.typescript  part06.typescript  [01;32muninit[0m
+list2.c  [01;32mmalloc[0m    part02.typescript  part07.typescript  uninit.c
+[01;32mlist3[0m    malloc.c  part03.typescript  part08.typescript
+[m]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ lsvalgrind --leak-check=full \ list4 foo bar baz qux
+valgrind:  list4: command not found
+]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ echo $?
+127
+]0;bambriz@unix2:lab5[bambriz@unix2 lab5]$ exit
+exit
+
+Script done on Thu 07 Nov 2013 04:46:09 AM PST

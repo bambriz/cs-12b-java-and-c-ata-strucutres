@@ -1,0 +1,53 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@ * @;
+
+
+1.2
+date	2013.11.07.12.53.28;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2013.11.07.12.50.48;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@//Bryan Ambriz bambriz
+
+#include <stdio.h>
+
+extern char **environ;
+
+int main (int argc, char **argv){
+   for (int z = 0; environ[z] != NULL; z++){
+      
+       printf("%s\n", environ[z]);
+
+   }
+
+}
+@
+
+
+1.1
+log
+@-
+@
+text
+@d8 1
+a8 1
+   for (int z = 0; environ[z] != NULL; i++){
+@

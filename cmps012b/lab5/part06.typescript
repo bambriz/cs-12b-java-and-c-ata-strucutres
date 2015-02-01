@@ -1,0 +1,119 @@
+Script started on Thu 08 May 2014 01:01:55 AM PDT
+You are currently using 32% (156.3 MiB) of your 488.3 MiB quota.
+[bambriz@unix1 lab5]$ mk list2.c
+CSOURCE=list2.c EXECBIN=list2
++ cid + list2.c
++ checksource list2.c
+checksource: line length > 72 characters
+   file "list2.c": 1 errors: line 21
+checksource: TOTAL COMPLAINTS: 1
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list2.c -o list2 -lm
+list2.c: In function ‘main’:
+list2.c:12:18: warning: unused parameter ‘argc’ [-Wunused-parameter]
+    int main (int argc, char **argv) {
+                  ^
++ set +x
+============================================================
+[bambriz@unix1 lab5]$ valgrind list2 foo bar
+==1937== Memcheck, a memory error detector
+==1937== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==1937== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==1937== Command: list2 foo bar
+==1937== 
+0x4c28180->node {word=0x7ff0001e9->[REMOTEHOST=50-1-98-172.dsl.dynamic.sonic.net], link=0x4c28130}
+0x4c28130->node {word=(nil)->[(null)], link=0x4c280e0}
+0x4c280e0->node {word=0x7ff0001e5->[bar], link=0x4c28090}
+0x4c28090->node {word=0x7ff0001e1->[foo], link=0x4c28040}
+==1937== Conditional jump or move depends on uninitialised value(s)
+==1937==    at 0x400682: main (list2.c:21)
+==1937== 
+==1937== 
+==1937== HEAP SUMMARY:
+==1937==     in use at exit: 80 bytes in 5 blocks
+==1937==   total heap usage: 5 allocs, 0 frees, 80 bytes allocated
+==1937== 
+==1937== LEAK SUMMARY:
+==1937==    definitely lost: 16 bytes in 1 blocks
+==1937==    indirectly lost: 64 bytes in 4 blocks
+==1937==      possibly lost: 0 bytes in 0 blocks
+==1937==    still reachable: 0 bytes in 0 blocks
+==1937==         suppressed: 0 bytes in 0 blocks
+==1937== Rerun with --leak-check=full to see details of leaked memory
+==1937== 
+==1937== For counts of detected and suppressed errors, rerun with: -v
+==1937== Use --track-origins=yes to see where uninitialised values come from
+==1937== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 6 from 6)
+[bambriz@unix1 lab5]$ gdb lia[Kst 2
+GNU gdb (GDB) Red Hat Enterprise Linux (7.6-34.el6)
+Copyright (C) 2013 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-redhat-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /afs/cats.ucsc.edu/users/u/bambriz/private/cmps012b/lab5/list2...done.
+(gdb) break n
+Function "n" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) n
+(gdb) next
+The program is not being run.
+(gdb) run[K[K[Kbreak 25
+Breakpoint 1 at 0x400684: file list2.c, line 25.
+(gdb) run foo bar
+Starting program: /afs/cats.ucsc.edu/users/u/bambriz/private/cmps012b/lab5/list2 foo bar
+warning: Skipping deprecated .gdb_index section in /usr/lib/debug/lib64/ld-2.12.so.debug.
+Do "set use-deprecated-index-sections on" before the file is read
+to use the section anyway.
+0x601090->node {word=0x7fffffffe085->[REMOTEHOST=50-1-98-172.dsl.dynamic.sonic.net], link=0x601070}
+0x601070->node {word=(nil)->[(null)], link=0x601050}
+0x601050->node {word=0x7fffffffe081->[bar], link=0x601030}
+0x601030->node {word=0x7fffffffe07d->[foo], link=0x601010}
+
+Breakpoint 1, main (argc=3, argv=0x7fffffffdd58) at list2.c:25
+25	             return 9;
+(gdb) where
+#0  main (argc=3, argv=0x7fffffffdd58) at list2.c:25
+(gdb) list
+20	             }
+21	               for (node *curr = head; curr->link != NULL; curr = curr->link) {
+22	                    printf ("%p->node {word=%p->[%s], link=%p}\n",
+23	                       curr, curr->word, curr->word, curr->link);
+24	                    }
+25	             return 9;
+26	         }
+(gdb) list list2.c:23
+18	                   node->link = head;
+19	                    head = node;
+20	             }
+21	               for (node *curr = head; curr->link != NULL; curr = curr->link) {
+22	                    printf ("%p->node {word=%p->[%s], link=%p}\n",
+23	                       curr, curr->word, curr->word, curr->link);
+24	                    }
+25	             return 9;
+26	         }
+(gdb) print head
+$1 = (node *) 0x601090
+(gdb) bt
+#0  main (argc=3, argv=0x7fffffffdd58) at list2.c:25
+(gdb) print head
+$2 = (node *) 0x601090
+(gdb) print *head
+$3 = {word = 0x7fffffffe085 "REMOTEHOST=50-1-98-172.dsl.dynamic.sonic.net", link = 0x601070}
+(gdb) print *(head->word)
+$4 = 82 'R'
+(gdb) print head->link->link->link
+$5 = (node *) 0x601030
+(gdb) print *(head->link->link->link)
+$6 = {word = 0x7fffffffe07d "foo", link = 0x601010}
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 2287] will be killed.
+
+Quit anyway? (y or n) y
+[bambriz@unix1 lab5]$ exit
+exit
+
+Script done on Thu 08 May 2014 01:07:29 AM PDT

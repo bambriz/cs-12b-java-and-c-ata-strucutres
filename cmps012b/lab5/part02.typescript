@@ -1,0 +1,49 @@
+Script started on Thu 08 May 2014 12:49:34 AM PDT
+You are currently using 32% (156.5 MiB) of your 488.3 MiB quota.
+[bambriz@unix1 lab5]$ gdb uninit
+GNU gdb (GDB) Red Hat Enterprise Linux (7.6-34.el6)
+Copyright (C) 2013 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-redhat-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /afs/cats.ucsc.edu/users/u/bambriz/private/cmps012b/lab5/uninit...done.
+(gdb) run
+Starting program: /afs/cats.ucsc.edu/users/u/bambriz/private/cmps012b/lab5/uninit 
+warning: Skipping deprecated .gdb_index section in /usr/lib/debug/lib64/ld-2.12.so.debug.
+Do "set use-deprecated-index-sections on" before the file is read
+to use the section anyway.
+0
+1
+[Inferior 1 (process 31859) exited normally]
+(gdb) where
+No stack.
+(gdb) liat[K[Kst
+1	// $Id: uninit.c,v 1.1 2013-11-07 02:47:22-08 - - $
+2	
+3	#include <stdio.h>
+4	#include <stdlib.h>
+5	
+6	int main (int argc, char **argv) {
+7	   int foo;
+8	   printf ("%d\n", foo);
+9	   int *pointer;
+10	   printf ("%d\n", *pointer);
+(gdb) print foo
+No symbol "foo" in current context.
+(gdb) print foo
+No symbol "foo" in current context.
+(gdb) print pointer
+No symbol "pointer" in current context.
+(gdb) print *pointer
+No symbol "pointer" in current context.
+(gdb) print argv[0]
+No symbol "argv" in current context.
+(gdb) quit
+[bambriz@unix1 lab5]$ exit
+exit
+
+Script done on Thu 08 May 2014 12:51:58 AM PDT

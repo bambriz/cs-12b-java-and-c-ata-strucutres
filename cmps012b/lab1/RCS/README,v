@@ -1,0 +1,42 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.2
+date	2014.04.01.18.03.33;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2013.10.01.20.48.14;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@Bryan Ambriz
+Bambriz
+unix2.lt.ucsc.edu
+hello this is a readme. it does nothing else.
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 4
+a4 1
+hello this is a readme. it does nothing else.@
